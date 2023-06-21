@@ -86,21 +86,21 @@ const store = createStore({
     },
 
     initResponsiblePersonsData(context) {
-      axios.get("http://localhost:8081/getPerson").then((response) => {
+      axios.get("http://localhost:8081/person/getPerson").then((response) => {
         context.commit("INIT_PERSON_DATA", response.data.data);
         console.log(response.data.data);
       });
     },
 
     initAllRequestsData(context) {
-      axios.get("http://localhost:8081/getTalepBilgi").then((response) => {
+      axios.get("http://localhost:8081/talepBilgi/getTalepBilgi").then((response) => {
         context.commit("INIT_REQUEST_DATA", response.data.data);
       });
     },
 
     postRequestData(context, data) {
       axios
-        .post("http://localhost:8081/postTalepBilgi", data)
+        .post("http://localhost:8081/talepBilgi/postTalepBilgi", data)
         .then((response) => {
           context.commit("SET_RESPONSE_DATA", response.data);
         })
@@ -108,7 +108,7 @@ const store = createStore({
           console.log("Error", error);
         });
       axios
-        .get("http://localhost:8081/getTalepBilgi")
+        .get("http://localhost:8081/talepBilgi/getTalepBilgi")
         .then((response) => {
           context.commit("INIT_REQUEST_DATA", response.data.data);
         });
@@ -116,7 +116,7 @@ const store = createStore({
 
     postFinanceRequestData(context, data) {
       axios
-        .post("http://localhost:8081/updateFinansTahkik", data)
+        .post("http://localhost:8081/talepBilgi/updateFinansTahkik", data)
         .then((response) => {
           context.commit("SET_RESPONSE_DATA", response.data);
         })
@@ -124,7 +124,7 @@ const store = createStore({
           console.log("Error", error);
         });
       axios
-        .get("http://localhost:8081/getTalepBilgi")
+        .get("http://localhost:8081/talepBilgi/getTalepBilgi")
         .then((response) => {
           context.commit("INIT_REQUEST_DATA", response.data.data);
         });
@@ -132,7 +132,7 @@ const store = createStore({
 
     postLegalRequestData(context, data) {
       axios
-        .post("http://localhost:8081/updateHukukTahkik", data)
+        .post("http://localhost:8081/talepBilgi/updateHukukTahkik", data)
         .then((response) => {
           context.commit("SET_RESPONSE_DATA", response.data);
         })
@@ -140,7 +140,7 @@ const store = createStore({
           console.log("Error", error);
         });
       axios
-        .get("http://localhost:8081/getTalepBilgi")
+        .get("http://localhost:8081/talepBilgi/getTalepBilgi")
         .then((response) => {
           context.commit("INIT_REQUEST_DATA", response.data.data);
         });
@@ -168,7 +168,7 @@ const store = createStore({
 
     updateStatusOfRequest() {
       axios
-        .post("http://localhost:8081/status", {
+        .post("http://localhost:8081/talepBilgi/status", {
           id: this.state.requestData.id,
           status: this.state.requestData.status,
         })
