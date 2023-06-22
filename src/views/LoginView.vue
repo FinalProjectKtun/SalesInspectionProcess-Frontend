@@ -16,7 +16,7 @@
                 <v-row>
                     <v-col>
                         <div class="text-left text-h5 mb-5">Şifre</div>
-                        <v-text-field append-inner-icon="mdi-lock-outline" variant="outlined" v-model="password"></v-text-field>
+                        <v-text-field append-inner-icon="mdi-lock-outline" variant="outlined" v-model="password" type="password"></v-text-field>
                     </v-col>
                 </v-row>
                 <v-row>
