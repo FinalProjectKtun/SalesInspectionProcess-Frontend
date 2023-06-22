@@ -11,7 +11,7 @@ const store = createStore({
       isDetailsModalOpen: false,
       isFinanceModalOpen: false,
       isHukukModalOpen: false,
-      loggedIn: true,
+      loggedIn: false,
       responsiblePersons: [],
       accessRequestedSystems: [],
       allRequestsData: [],
