@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar color="inherit">
+    <v-app-bar color="inherit" v-if="this.$route.name !== 'login'">
         <v-toolbar-title>
             <div class="text-left">
                 <RouterLink :to="{ name: 'home' }">
@@ -9,13 +9,13 @@
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <RouterLink :to="{ name: 'islem' }">
-            <v-btn variant="text" color="red-darken-4"><strong>İşlemde Bekliyor</strong></v-btn>
+            <v-btn variant="text" color="red-darken-4"><strong>İlk İnceleme</strong></v-btn>
         </RouterLink>
         <RouterLink :to="{ name: 'legal' }">
-            <v-btn variant="text" color="red-darken-4"><strong>Hukukta Bekliyor</strong></v-btn>
+            <v-btn variant="text" color="red-darken-4"><strong>Hukuksal İnceleme</strong></v-btn>
         </RouterLink>
         <RouterLink :to="{ name: 'finance' }">
-            <v-btn variant="text" color="red-darken-4"><strong>Finansta Bekliyor</strong></v-btn>
+            <v-btn variant="text" color="red-darken-4"><strong>Finansal İnceleme</strong></v-btn>
         </RouterLink>
         <v-btn icon @click="toggleTheme">
             <Transition>

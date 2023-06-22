@@ -55,8 +55,8 @@ import VCalendar from 'v-calendar';
 import 'v-calendar/style.css';
 
 const app = createApp(App)
-app.use(router)
-app.use(vuetify)
 app.use(store)
+app.use(vuetify)
+app.use(router)
 app.use(VCalendar, {})
 app.mount('#app')

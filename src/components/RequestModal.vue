@@ -4,7 +4,7 @@
             <v-card>
                 <v-card-title class="headline grey lighten-6" primary-title>
                     <strong>
-                        Yeni Teminat Mektubu
+                        Yeni Tahkik Talebi
                     </strong>
                 </v-card-title>
                 <v-form>
@@ -79,11 +79,11 @@
                             </v-col>
                         </v-row>
                         <v-card-actions>
-                            <v-btn size="large" mb-4 ml-4 color="green" @click="closeModal(), submitData()">
+                            <v-btn size="x-large" mb-4 ml-4 color="green" @click="closeModal(), submitData()">
                                 Kaydet
                             </v-btn>
                             <v-spacer></v-spacer>
-                            <v-btn size="large" mb-4 ml-4 color="primary" @click="closeModal()">
+                            <v-btn size="x-large" mb-4 ml-4 color="primary" @click="closeModal()">
                                 Close
                             </v-btn>
                         </v-card-actions>

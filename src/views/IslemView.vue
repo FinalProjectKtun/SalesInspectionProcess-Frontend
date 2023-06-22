@@ -7,7 +7,7 @@
 
         </div>
         <div>
-            <ConfirmationModal modalTitle="Finans Onay Ekranı" v-show = this.$store.state.isConModalOpen>
+            <ConfirmationModal modalTitle="İlk Onay Ekranı" v-show = this.$store.state.isConModalOpen>
             </ConfirmationModal>
         </div>
     </div>

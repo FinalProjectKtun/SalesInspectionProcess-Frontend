@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import axios from "axios";
+import router from "../src/router/router";
 
 const store = createStore({
   state() {
@@ -10,10 +11,12 @@ const store = createStore({
       isDetailsModalOpen: false,
       isFinanceModalOpen: false,
       isHukukModalOpen: false,
+      loggedIn: true,
       responsiblePersons: [],
       accessRequestedSystems: [],
       allRequestsData: [],
       postReqResponseData: [],
+      signInResponse: "",
       requestData: {},
     };
   },
@@ -26,7 +29,7 @@ const store = createStore({
     OPEN_DETAILS_MODAL(state) {
       state.isDetailsModalOpen = true;
     },
-    
+
     OPEN_FINANCE_MODAL(state) {
       state.isFinanceModalOpen = true;
     },
@@ -63,6 +66,9 @@ const store = createStore({
       state.isConModalOpen = true;
     },
 
+    SET_SIGN_IN_RESPONSE(state, data) {
+      state.signInResponse = data;
+    },
     //   INIT_SYSTEM_DATA(state, newData) {
     //     state.accessRequestedSystems = newData;
     //   },
@@ -93,9 +99,11 @@ const store = createStore({
     },
 
     initAllRequestsData(context) {
-      axios.get("http://localhost:8081/talepBilgi/getTalepBilgi").then((response) => {
-        context.commit("INIT_REQUEST_DATA", response.data.data);
-      });
+      axios
+        .get("http://localhost:8081/talepBilgi/getTalepBilgi")
+        .then((response) => {
+          context.commit("INIT_REQUEST_DATA", response.data.data);
+        });
     },
 
     postRequestData(context, data) {
@@ -146,6 +154,22 @@ const store = createStore({
         });
     },
 
+    signIn(context, data) {
+      axios
+        .post("http://localhost:8081/api/auth/signin", data)
+        .then((response) => {
+          context.commit("SET_SIGN_IN_RESPONSE", response.data);
+          console.log("response data", response.data);
+          if (response.data === "User signed-in successfully!.") {
+            router.push({ path: "/" });
+            this.state.loggedIn = true;
+          }
+        })
+        .catch((error) => {
+          console.log("Error", error);
+        });
+    },
+
     openConModal({ commit }) {
       commit("OPEN_CONFIRMATION_MODAL");
     },
@@ -158,14 +182,6 @@ const store = createStore({
       commit("GET_DATA_TO_MODAL", data);
     },
 
-    //   initAccessRequestedSystemsData(context) {
-    //     axios
-    //       .get("http://localhost:8081/api/scs/getSupplierConnectSystem")
-    //       .then((response) => {
-    //         context.commit("INIT_SYSTEM_DATA", response.data.data);
-    //       });
-    //   },
-
     updateStatusOfRequest() {
       axios
         .post("http://localhost:8081/talepBilgi/status", {
@@ -177,17 +193,25 @@ const store = createStore({
         });
     },
 
-    //   initReasonForRejection() {
+    //   initAccessRequestedSystemsData(context) {
     //     axios
-    //       .post("http://localhost:8081/updateSupplierStatus", {
-    //         id: this.state.requestData.id,
-    //         status: this.state.requestData.status,
-    //         reasonForRejection: this.state.requestData.reasonForRejection,
-    //       })
-    //       .catch((error) => {
-    //         console.log("Error", error);
+    //       .get("http://localhost:8081/api/scs/getSupplierConnectSystem")
+    //       .then((response) => {
+    //         context.commit("INIT_SYSTEM_DATA", response.data.data);
     //       });
     //   },
+    initReasonForRejection() {
+      axios
+        .post("http://localhost:8081/talepBilgi/reasonForRejection", {
+          id: this.state.requestData.id,
+          status: this.state.requestData.status,
+          reasonForRejection: this.state.requestData.reasonForRejection,
+          reasonForRejectionPerson: this.state.requestData.reasonForRejectionPerson
+        })
+        .catch((error) => {
+          console.log("Error", error);
+        });
+    },
   },
 });
 

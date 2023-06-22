@@ -57,7 +57,6 @@ export default {
                 { title: 'Firma Adı', align: 'center', key: 'firmaAdi', },
                 { title: 'F. Satış Temsilcisi', align: 'center', key: 'firmaSatisTemsilcisi' },
                 { title: 'F. Vergi Dairesi', align: 'center', key: 'firmaVergiDairesi', sortable: false },
-                { title: 'F. Vergi No', align: 'center', key: 'firmaVergiNo', sortable: false },
                 { title: 'Açıklama', align: 'center', key: 'aciklama' },
                 { title: 'Firma Adres', align: 'center', key: 'firmaAdres', sortable: false },
                 { title: 'Durum', align: 'center', key: 'status', sortable: false },
@@ -82,6 +81,7 @@ export default {
         openDetailModal(item) {
             this.$store.commit('OPEN_DETAILS_MODAL')
             this.$store.dispatch('getRequestDataToModal', item)
+            console.log(item);
         },
 
         openConModal(item) {
@@ -106,11 +106,11 @@ export default {
             }
 
             else if (this.$route.name === 'finance') {
-                return this.$store.state.allRequestsData.filter(item => item.finansStatus === null && item.status !== 'İslem Bekliyor' && item.status !== 'Hukuk Onayı Bekleniyor');
+                return this.$store.state.allRequestsData.filter(item => item.finansStatus === null && item.status !== 'İslem Bekliyor' && item.status !== 'Reddedildi' && item.status !== 'Hukuk Onayı Bekleniyor');
             }
 
             else if (this.$route.name === 'legal') {
-                return this.$store.state.allRequestsData.filter(item => item.hukukStatus === null && item.status !== 'İslem Bekliyor' && item.status !== 'Finans Onayı Bekleniyor');
+                return this.$store.state.allRequestsData.filter(item => item.hukukStatus === null && item.status !== 'İslem Bekliyor' && item.status !== 'Reddedildi' && item.status !== 'Finans Onayı Bekleniyor');
             }
             else {
                 return this.$store.state.allRequestsData;

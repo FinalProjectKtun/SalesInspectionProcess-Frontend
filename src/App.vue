@@ -25,7 +25,11 @@ export default {
   </v-app>
 </template>
 
-<style scoped>
+<style>
+body {
+  font-family: 'Karla', sans-serif !important;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

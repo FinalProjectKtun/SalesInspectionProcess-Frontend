@@ -62,92 +62,105 @@
                                     requestData.firmaAdres }}</v-text-field>
                             </v-col>
                         </v-row>
-                        <!-- FİNANS TAHKİK BÖLÜMÜ -->
-                        <v-row>
-                            <v-col>
-                                <v-card flat>
-                                    <v-card-title class="headline grey lighten-6 pl-0 mb-5" primary-title>
-                                        <strong>
-                                            Finans Tahkik Bilgileri
-                                        </strong>
-                                    </v-card-title>
-                                    <v-row>
-                                        <v-col md="6" sm="12" lg="6">
-                                            <h4 class="mb-3">Tahkik Yapan Kişi</h4>
-                                            <v-text-field item-title="name" readonly variant="outlined">{{
-                                                requestData.finansTahkikYapanKisi }}</v-text-field>
-                                        </v-col>
-                                        <v-col md=" 6" sm="12" lg="6">
-                                            <h4 class="mb-3">Talep Tamamlanma Tarihi</h4>
-                                            <div class="d-flex justify-center">
-                                                <v-text-field variant="outlined" readonly
-                                                    append-inner-icon="mdi-calendar-month-outline">{{
-                                                        requestData.finansTalepTamamlamaTarihi }}</v-text-field>
-                                            </div>
-                                        </v-col>
-                                    </v-row>
-                                    <v-row>
-                                        <v-col md="12" sm="12" lg="12">
-                                            <h4 class="mb-3">Banka İnceleme Sonuçları</h4>
-                                            <v-text-field readonly required variant="outlined">{{
-                                                requestData.finansBankaIncelemeSonuclari }}</v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                    <v-row>
-                                        <v-col md="12" sm="12" lg="12">
-                                            <h4 class="mb-3">Açıklama</h4>
-                                            <v-text-field readonly required variant="outlined">{{
-                                                requestData.finansAciklama }}</v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-card>
+                        <v-row v-if="this.requestData.status === 'Reddedildi'">
+                            <v-col md="6" sm="12" lg="6">
+                                <h4 class="mb-3">Red Sebebi</h4>
+                                <v-text-field readonly required variant="outlined">{{
+                                    requestData.reasonForRejection }}</v-text-field>
+                            </v-col>
+                            <v-col md="6" sm="12" lg="6">
+                                <h4 class="mb-3">Reddeden Kişi</h4>
+                                <v-text-field readonly required variant="outlined">{{
+                                    requestData.reasonForRejectionPerson }}</v-text-field>
                             </v-col>
                         </v-row>
-                        <!--    -->
+                        <div v-if="this.requestData.status !== 'Reddedildi'">
+                            <!-- FİNANS TAHKİK BÖLÜMÜ -->
+                            <v-row>
+                                <v-col>
+                                    <v-card flat>
+                                        <v-card-title class="headline grey lighten-6 pl-0 mb-5" primary-title>
+                                            <strong>
+                                                Finans Tahkik Bilgileri
+                                            </strong>
+                                        </v-card-title>
+                                        <v-row>
+                                            <v-col md="6" sm="12" lg="6">
+                                                <h4 class="mb-3">Tahkik Yapan Kişi</h4>
+                                                <v-text-field item-title="name" readonly variant="outlined">{{
+                                                    requestData.finansTahkikYapanKisi }}</v-text-field>
+                                            </v-col>
+                                            <v-col md=" 6" sm="12" lg="6">
+                                                <h4 class="mb-3">Talep Tamamlanma Tarihi</h4>
+                                                <div class="d-flex justify-center">
+                                                    <v-text-field variant="outlined" readonly
+                                                        append-inner-icon="mdi-calendar-month-outline">{{
+                                                            requestData.finansTalepTamamlamaTarihi }}</v-text-field>
+                                                </div>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col md="12" sm="12" lg="12">
+                                                <h4 class="mb-3">Banka İnceleme Sonuçları</h4>
+                                                <v-text-field readonly required variant="outlined">{{
+                                                    requestData.finansBankaIncelemeSonuclari }}</v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col md="12" sm="12" lg="12">
+                                                <h4 class="mb-3">Açıklama</h4>
+                                                <v-text-field readonly required variant="outlined">{{
+                                                    requestData.finansAciklama }}</v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                    </v-card>
+                                </v-col>
+                            </v-row>
+                            <!--    -->
 
-                        <!-- HUKUK TAHKİK BÖLÜMÜ -->
-                        <v-row>
-                            <v-col>
-                                <v-card flat>
-                                    <v-card-title class="headline grey lighten-6 pl-0 mb-5" primary-title>
-                                        <strong>
-                                            Hukuk Tahkik Bilgileri
-                                        </strong>
-                                    </v-card-title>
-                                    <v-row>
-                                        <v-col md="6" sm="12" lg="6">
-                                            <h4 class="mb-3">Tahkik Yapan Kişi</h4>
-                                            <v-text-field item-title="name" readonly variant="outlined">{{
-                                                requestData.hukukTahkikYapanKisi }}</v-text-field>
-                                        </v-col>
-                                        <v-col md=" 6" sm="12" lg="6">
-                                            <h4 class="mb-3">Talep Tamamlanma Tarihi</h4>
-                                            <div class="d-flex justify-center">
-                                                <v-text-field variant="outlined" readonly
-                                                    append-inner-icon="mdi-calendar-month-outline">{{
-                                                        requestData.hukukTalepTamamlamaTarihi }}</v-text-field>
-                                            </div>
-                                        </v-col>
-                                    </v-row>
-                                    <v-row>
-                                        <v-col md="12" sm="12" lg="12">
-                                            <h4 class="mb-3">Hukuksal İnceleme Sonuçları</h4>
-                                            <v-text-field readonly required variant="outlined">{{
-                                                requestData.hukukBankaIncelemeSonuclari }}</v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                    <v-row>
-                                        <v-col md="12" sm="12" lg="12">
-                                            <h4 class="mb-3">Açıklama</h4>
-                                            <v-text-field readonly required variant="outlined">{{
-                                                requestData.hukukAciklama }}</v-text-field>
-                                        </v-col>
-                                    </v-row>
-                                </v-card>
-                            </v-col>
-                        </v-row>
-                        <!-- -->
-
+                            <!-- HUKUK TAHKİK BÖLÜMÜ -->
+                            <v-row>
+                                <v-col>
+                                    <v-card flat>
+                                        <v-card-title class="headline grey lighten-6 pl-0 mb-5" primary-title>
+                                            <strong>
+                                                Hukuk Tahkik Bilgileri
+                                            </strong>
+                                        </v-card-title>
+                                        <v-row>
+                                            <v-col md="6" sm="12" lg="6">
+                                                <h4 class="mb-3">Tahkik Yapan Kişi</h4>
+                                                <v-text-field item-title="name" readonly variant="outlined">{{
+                                                    requestData.hukukTahkikYapanKisi }}</v-text-field>
+                                            </v-col>
+                                            <v-col md=" 6" sm="12" lg="6">
+                                                <h4 class="mb-3">Talep Tamamlanma Tarihi</h4>
+                                                <div class="d-flex justify-center">
+                                                    <v-text-field variant="outlined" readonly
+                                                        append-inner-icon="mdi-calendar-month-outline">{{
+                                                            requestData.hukukTalepTamamlamaTarihi }}</v-text-field>
+                                                </div>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col md="12" sm="12" lg="12">
+                                                <h4 class="mb-3">Hukuksal İnceleme Sonuçları</h4>
+                                                <v-text-field readonly required variant="outlined">{{
+                                                    requestData.hukukBankaIncelemeSonuclari }}</v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                        <v-row>
+                                            <v-col md="12" sm="12" lg="12">
+                                                <h4 class="mb-3">Açıklama</h4>
+                                                <v-text-field readonly required variant="outlined">{{
+                                                    requestData.hukukAciklama }}</v-text-field>
+                                            </v-col>
+                                        </v-row>
+                                    </v-card>
+                                </v-col>
+                            </v-row>
+                            <!-- -->
+                        </div>
                         <v-card-actions>
                             <v-spacer></v-spacer>
                             <v-btn size="large" mb-4 ml-4 color="primary" @click="closeModal()">

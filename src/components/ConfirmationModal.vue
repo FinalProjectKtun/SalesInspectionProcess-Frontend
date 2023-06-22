@@ -69,6 +69,29 @@
                                 Close
                             </v-btn>
                         </v-card-actions>
+                        <v-dialog v-model="showNestedDialog" persistent :position-x="0" :position-y="1" max-width="800px">
+                            <v-card class="rejection-modal-wrapper pa-4">
+                                <v-card-title><strong>Red Sebebini Giriniz</strong></v-card-title>
+                                <v-row>
+                                    <v-col cols="6" md="6">
+                                        <h4 class="mb-3">Açıklama</h4>
+                                        <v-text-field variant="outlined" placeholder="Red Sebebi"
+                                            v-model="rejectionDescription"></v-text-field>
+                                    </v-col>
+                                    <v-col cols="6" md="6">
+                                        <h4 class="mb-3">Red Gerçekleştiren Kişi</h4>
+                                        <v-text-field variant="outlined">{{ requestData.talepEdenKisi }}</v-text-field>
+                                    </v-col>
+                                </v-row>
+                                <v-card-actions>
+                                    <v-btn color="green darken-1" text
+                                        @click="showNestedDialog = false, onReject(), closeModal()"><strong>Gönder</strong></v-btn>
+                                    <v-spacer></v-spacer>
+                                    <v-btn color="primary" text
+                                        @click="showNestedDialog = false"><strong>Kapat</strong></v-btn>
+                                </v-card-actions>
+                            </v-card>
+                        </v-dialog>
                     </v-container>
                 </v-form>
             </v-card>
@@ -78,7 +101,6 @@
     
 <script>
 import { mapActions } from 'vuex';
-import { ref } from 'vue';
 export default {
 
     props: {
@@ -95,17 +117,32 @@ export default {
         connectionEndTime: null,
         supplierName: null,
         requestDescription: null,
+        rejectionDescription: null,
+        showNestedDialog: false,
     }),
 
     methods: {
         ...mapActions(['postRequestData']),
+        ...mapActions(['initReasonForRejection']),
+        ...mapActions(['updateStatusOfRequest']),
 
         onApprove() {
             // Onaylama işlemi
             if (this.$route.name === 'islem') {
                 this.requestData.status = "Hukuk ve Finans Onayı Bekleniyor"
             }
-            this.$store.dispatch('updateStatusOfRequest')
+            this.updateStatusOfRequest()
+        },
+
+        onReject() {
+            console.log(this.requestData.reasonForRejectionPerson);
+            console.log('talep eden' ,this.requestData.talepEdenKisi);
+            console.log(this.rejectionDescription);
+            this.requestData.status = "Reddedildi"
+            this.requestData.reasonForRejection = this.rejectionDescription
+            this.requestData.reasonForRejectionPerson = this.requestData.talepEdenKisi
+            this.updateStatusOfRequest()
+            this.initReasonForRejection()
         },
 
         submitData() {
