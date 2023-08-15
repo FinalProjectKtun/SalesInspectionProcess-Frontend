@@ -12,6 +12,7 @@ const store = createStore({
       isFinanceModalOpen: false,
       isHukukModalOpen: false,
       loggedIn: false,
+      showInfo: false,
       responsiblePersons: [],
       accessRequestedSystems: [],
       allRequestsData: [],
@@ -163,6 +164,10 @@ const store = createStore({
           if (response.data === "User signed-in successfully!.") {
             router.push({ path: "/" });
             this.state.loggedIn = true;
+          }
+
+          else if (response.data !== "User signed-in successfully!.") {
+            this.state.showInfo = true;
           }
         })
         .catch((error) => {

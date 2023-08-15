@@ -7,16 +7,28 @@
                         <img src='../assets/alisan-logo.png' width="200" />
                     </v-col>
                 </v-row>
+                <v-row v-if="this.$store.state.showInfo">
+                    <v-col>
+                        <div>
+                            <v-card variant="outlined">
+                                <v-alert type="warning" title="Failed" text="Kullanıcı Adı veya Şifre Yanlış!">
+                                </v-alert>
+                            </v-card>
+                        </div>
+                    </v-col>
+                </v-row>
                 <v-row>
                     <v-col>
                         <div class="text-left text-h5 mb-5">Kullanıcı Adı ya da E-mail</div>
-                        <v-text-field append-inner-icon="mdi-email-outline" variant="outlined" v-model="username"></v-text-field>
+                        <v-text-field append-inner-icon="mdi-email-outline" variant="outlined"
+                            v-model="username"></v-text-field>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
                         <div class="text-left text-h5 mb-5">Şifre</div>
-                        <v-text-field append-inner-icon="mdi-lock-outline" variant="outlined" v-model="password" type="password"></v-text-field>
+                        <v-text-field append-inner-icon="mdi-lock-outline" variant="outlined" v-model="password"
+                            type="password"></v-text-field>
                     </v-col>
                 </v-row>
                 <v-row>
